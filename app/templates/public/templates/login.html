@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SGI | Entrar</title>
+
+    <!-- favicon -->
+    <link rel="shotcut icon" href="{{ url_for('static', filename='img/favicon.png')}}">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css')}}"/>
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css')}}"/>
+  </head>
+
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+          <a href="/app/templates/public/templates/public_template.html" class="h1" style="color: gray">SGI</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body login-card-body">
+          
+          <section id="form-login">
+            
+            <form>
+              
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Usuário" id="userLogin">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Senha" id="userPassword">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-4 " style="float: right;">
+                <button onclick={handleSubmit()} type="submit" class="btn btn-primary btn-block">Entrar</button>
+              </div>
+            </form>
+            
+          </section>
+          
+          
+        </div>
+      </div>
+
+      <!-- jQuery --> 
+      <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+      <!-- Bootstrap 4 -->
+      <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+      <!-- AdminLTE App -->
+      <script src="{{ url_for('static', filename='js/adminlte.min.js')}}"></script>
+      <script>
+
+        function handleSubmit() {
+
+          let login = document.getElementById("userLogin")
+          let password = document.getElementById("userPassword")
+          
+          
+          let entry = {
+            login: login.value, 
+            password: password.value
+          }
+
+          fetch(`${window.origin}/auth`, {
+            method: "POST",
+            credentials: "include", //insert cookies in the page
+            body: JSON.stringify(entry), 
+            cache: "no-cache",
+            headers: new Headers({
+              "content-type": "application/json"
+            })
+          }).then(function (response) {
+              if (response.status !== 200){
+                console.log(response.status)
+                return
+              } else {
+                window.location.href = "home"
+              }
+            })
+          }
+
+      </script>
+  </body>
+
+</html>

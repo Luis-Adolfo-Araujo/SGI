@@ -1,0 +1,110 @@
+{% extends "public/templates/webTemplate.html" %}
+
+{% block title %} Cadastrar Usuário {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper iframe-mode" data-widget="iframe" data-loading-screen="750">
+  <div class="tab-content">
+    
+    <section class="content">
+      <div class="container-fluid" style="padding-top: 40px; padding-left: 100px; width: 90rem;">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6" >
+            <!-- general form elements -->
+            <div class="card card-primary" >
+              <div class="card-header">
+                <h3 class="card-title">Cadastro de Usuário</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form>
+                <div class="card-body">
+                  <!-- Name -->
+                  <div class="form-group" style="width: 18rem; float: right;">
+                    <label for="name">Nome</label>
+                    <input required="" type="text" class="form-control" id="name" placeholder="Nome do usuário"/>
+                  </div>
+                  <!-- Login -->
+                  <div class="form-group" style="width: 18rem;">
+                    <label for="login">Login</label>
+                    <input required="" type="text" class="form-control" id="userLogin" placeholder="Login do usuário">
+                  </div>
+                  <!-- Email -->
+                  <div class="form-group" style="width: 18rem; float: right;">
+                    <label for="email">Email</label>
+                    <input required="" type="email" class="form-control" id="userEmail" placeholder="Email do usuário">
+                  </div>
+                  <!-- Password -->
+                  <div class="form-group" style="width: 18rem;">
+                    <label for="password">Senha</label>
+                    <input required="" type="password" class="form-control" id="userPassword" placeholder="Senha do usuário">
+                  </div>
+                  <h6 style="padding-top: 10px;"><b>Permissão</b></h6>
+                  <div class="form-group" style="width: 18rem;">
+                    <select required="" style="width: 10rem; padding-left: 28;" id="userPermission">
+                      <option disabled value="">Selecione</option>
+                      <option>Administrador</option>
+                      <option>Almoxarifado</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" style="float: right;" onclick={submit_entry()}>Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+  </div>
+</div>
+      
+{% endblock %} 
+
+{% block script %}
+
+  <script>
+
+    function submit_entry() {
+
+      let name = document.getElementById("name")
+      let login = document.getElementById("userLogin")
+      let email = document.getElementById("userEmail")
+      let password = document.getElementById("userPassword")
+      let permission = document.getElementById("userPermission")
+    
+      let entry = {
+        name: name.value,
+        login: login.value,
+        email: email.value,
+        password: password.value,
+        permission: permission.value
+      };
+      
+      fetch(`${window.origin}/user/newUser`, {
+        method: "POST",
+        credentials: "include", //insert cookies in the page
+        body: JSON.stringify(entry), 
+        cache: "no-cache",
+        headers: new Headers({
+          "content-type": "application/json"
+        })
+      }).then(function (response) {
+          if (response.status !== 200){
+            console.log(response.status)
+            return
+          }
+        })
+      }
+
+
+  </script>
+
+{% endblock %}

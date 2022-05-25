@@ -1,0 +1,66 @@
+{% extends "public/templates/webTemplate.html" %}
+
+{% block title %} Cadastrar Usuário {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content" style="padding-right: 280px;">
+    <div class="card">
+      <div class="card-header" style="padding-right: 20px;">
+        <a class="link" href="/user" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
+        <h2 class="card-title" style="padding-top: 10px;"><b>Usuários</b></h2>
+      </div>
+      </div>
+      <div class="card-body">
+        <div id="userGrid" style="padding-bottom: 50px;"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+</div>
+
+</script>
+</body>
+
+</html>
+{% endblock %}
+
+{% block script %} 
+<script>
+  $(function () {
+    $("#userGrid").jsGrid({
+      height: "100%",
+      width: "100%",
+  
+      sorting: true,
+      paging: true,
+  
+      data: db.clients,
+  
+      fields: [
+        { name: "Nome", type: "text", width: 150 },
+        { name: "Login", type: "number", width: 150 },
+        { name: "Email", type: "text", width: 200 },
+        { name: "Excluido", type: "select", items: db.countries, valueField: "Id", textField: "Name", width: 100 },
+        { name: "permissao", type: "text", width: 150 },
+        { name: "ativo", type: "checkbox", title: "Ativo" }
+      ]
+    });
+  });
+</script>
+
+
+{% endblock %}

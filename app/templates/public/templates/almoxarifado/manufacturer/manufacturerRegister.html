@@ -1,0 +1,132 @@
+{% extends "public/templates/webTemplate.html" %}
+
+{% block title %} Cadastrar Fabricante {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="container-fluid" style="padding-left: 100px; width: 90rem;">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6" >
+          <!-- general form elements -->
+          <div class="card card-primary" >
+            <div class="card-header">
+              <h3 class="card-title">Cadastro de Fabricante</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form>
+              <div class="card-body">
+                <!-- Nome -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="name">Nome</label>
+                  <input type="text" class="form-control" id="nomeFornecedor" placeholder="Nome do fornecedor"/>
+                </div>
+                <!-- Nome Fantasia -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="fantasyName">Nome Fantasia</label>
+                  <input type="text" class="form-control" id="NomeFantasiaFornecedor" placeholder="Nome fantasia">
+                </div>
+                <!-- Logradouro -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="logradouro">Logradouro</label>
+                  <input type="text" class="form-control" id="logradouroFornecedor" placeholder="Logradouro">
+                </div>
+                <!-- Cnpj -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="cnpj">Cnpj</label>
+                  <input type="number" class="form-control" id="cnpjFornecedor" placeholder="Cnpj do fornecedor">
+                </div>
+                <!-- Cidade -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="cidade">Cidade</label>
+                  <input type="text" class="form-control" id="cidadeFornecedor" placeholder="cidade">
+                </div>
+                <!-- Numero -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="numero">Número</label>
+                  <input type="number" class="form-control" id="numeroFornecedor" placeholder="número">
+                </div>
+                <!-- Cep -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="cep">Cep</label>
+                  <input type="number" class="form-control" id="cepFornecedor" placeholder="Cep">
+                </div>
+                <!-- UF -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="uf">UF</label>
+                  <input type="text" class="form-control" id="ufFornecedor" placeholder="UF">
+                </div>
+                <!-- Bairro -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="bairro">Bairro</label>
+                  <input type="text" class="form-control" id="bairroFornecedor" placeholder="Bairro">
+                </div>
+                <!-- Nome Contato 1 -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="nomeContato1">Nome Contato 1</label>
+                  <input type="text" class="form-control" id="nomeContato1Fornecedor" placeholder="Nome do contato">
+                </div>
+                <!-- Nome Contato 2 -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="nomeContato2">Nome Contato 2</label>
+                  <input type="text" class="form-control" id="nomeContato2Fornecedor" placeholder="Nome do contato">
+                </div>
+                <!-- Email Contato 1 -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="emailContato1">Nome Contato 1</label>
+                  <input type="email" class="form-control" id="emailContato1Fornecedor" placeholder="Email do contato">
+                </div>
+                <!-- Email Contato 2 -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="emailContato2">Nome Contato 2</label>
+                  <input type="email" class="form-control" id="emailContato2Fornecedor" placeholder="Email do contato">
+                </div>
+                <!-- Fone Contato 1 -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="foneContato1">Fone Contato 1</label>
+                  <input type="number" class="form-control" id="foneContato1Fornecedor" placeholder="fone do contato">
+                </div>
+                <!-- Email Fone 2 -->
+                <div class="form-group" style="width: 18rem;  float: left;">
+                  <label for="foneContato2">Fone Contato 2</label>
+                  <input type="number" class="form-control" id="foenContato2Fornecedor" placeholder="fone do contato">
+                </div>
+                <!-- Situação -->
+                <div class="form-group" style="width: 18rem; float: right; padding-top: 12px;">
+                  <h6><b>Situação</b></h6>
+                  <select style="width: 10rem; padding-left: 28;">
+                    <option>Selecione</option>
+                    <option>Ativo</option>
+                    <option>Inativo</option>
+                  </select>
+                </div>
+              </div>
+              </select>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "public/templates/webTemplate.html" %}
+
+{% block title %} Cadastrar Material {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="container-fluid" style="padding-top: 40px; padding-left: 100px; width: 90rem;">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6" >
+          <!-- general form elements -->
+          <div class="card card-primary" >
+            <div class="card-header">
+              <h3 class="card-title">Cadastro de Material</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form>
+              <div class="card-body">
+                <!-- Tipo -->
+                <div class="form-group" style="width: 18rem; float: right; padding-top: 12px;">
+                  <h6><b>Tipo</b></h6>
+                  <select style="width: 10rem; padding-left: 28;">
+                    <option>Selecione</option>
+                    <option>Câmera</option>
+                    <option>Rastreador</option>
+                    <option>Outros</option>
+                  </select>
+                </div>
+                <!-- Grupo -->
+                <div class="form-group" style="width: 18rem; padding-top: 12px;">
+                  <h6><b>Grupo</b></h6>
+                  <select style="width: 10rem; padding-left: 28;">
+                    <option>Selecione</option>
+                    <option>Câmera</option>
+                    <option>Rastreador</option>
+                    <option>Outros</option>
+                  </select>
+                </div>
+                <!-- Modelo -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="modelo">Modelo</label>
+                  <input type="text" class="form-control" id="materialModel" placeholder="Modelo do material"/>
+                </div>
+                <!-- Fabricante -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="Fabricante">Fabricante</label>
+                  <input type="text" class="form-control" id="manufacturerMaterial" placeholder="Fabricante do material">
+                </div>
+                <!-- Estoque Mínimo -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="positionStock">Posição no Estoque</label>
+                  <input type="text" class="form-control" id="positionStock" placeholder="Posição no Estoque">
+                </div>
+                <!-- Posicao Estoque -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="estoqueMinimo">Estoque Mínimo</label>
+                  <input type="number" class="form-control" id="minStock" placeholder="Estoque minimo">
+                </div>
+                <!-- Número de Série -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="ncm">NCM</label>
+                  <input type="text" class="form-control" id="materialNcm" placeholder="NCM do material">
+                </div>
+                <!-- NCM -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="numeroSerie">Número de Série</label>
+                  <input type="number" class="form-control" id="serialNumber" placeholder="Número de Série">
+                </div>
+                <!-- Upload Foto -->
+                <div class="form-group">
+                  <label for="InputFile">Foto</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="InputFile" style="float: right;">
+                      <label class="custom-file-label" for="InputFile">Escolher Arquivo</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

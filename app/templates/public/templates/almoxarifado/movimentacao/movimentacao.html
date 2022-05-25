@@ -1,0 +1,65 @@
+{% extends "public/templates/webTemplate.html" %}
+
+{% block title %} Cadastrar Movimentação {% endblock %}
+
+{% block body %}
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="container-fluid" style="padding-top: 40px; padding-left: 100px; width: 90rem;">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6" >
+          <!-- general form elements -->
+          <div class="card card-primary" >
+            <div class="card-header">
+              <h3 class="card-title">Cadastro de Movimentação</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form>
+              <div class="card-body">
+                <!-- Fornecedor -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="tipo">Tipo</label>
+                  <input type="text" class="form-control" id="tipoMovimentacao" placeholder="Tipo de Movimentação"/>
+                </div>
+                <!-- Tipo -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="Fornecedor">Fornecedor</label>
+                  <input type="text" class="form-control" id="ProviderMaterial" placeholder="Fornecedor da Movimentação">
+                </div>
+                <!-- Quantidade -->
+                <div class="form-group" style="width: 18rem; float: right;">
+                  <label for="Valor">Valor</label>
+                  <input type="number" class="form-control" id="value" placeholder="Valor da Movimentação">
+                </div>
+                <!-- Valor -->
+                <div class="form-group" style="width: 18rem;">
+                  <label for="quantidade">Quantidade</label>
+                  <input type="number" class="form-control" id="quantity" placeholder="Quantidade">
+                </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
