@@ -13,10 +13,10 @@ app.secret_key = "lakjsndcpuansdpa234897230h2u1h23iu4b23kb12j3hbe1o23n123e1kjln"
 
 engine = create_engine('mysql+pymysql://dev:e77989ed21758e78331b20e477fc5582@191.252.156.244:3306/sgi')
 
+
 session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
-
 Base = declarative_base()
 Base.query = session.query_property()
 db = SQLAlchemy(app)

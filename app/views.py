@@ -4,11 +4,13 @@ from flask_login import login_required, current_user
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-  
-  if request.method == "POST": 
+  try:
+    return render_template("public/templates/webTemplate.html", name=current_user.nome)
+  except:
+    if request.method == "POST": 
 
-    return redirect(request.url)
-  return render_template("public/templates/login.html")
+      return redirect(request.url)
+    return render_template("public/templates/login.html")
 
 # alterar arquivo de webTemplate para home.
 @app.route("/home")

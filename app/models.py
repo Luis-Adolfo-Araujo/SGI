@@ -17,7 +17,7 @@ class Usuario(UserMixin, Base):
   def __repr__(self):
     return f"<User nome={self.nome} login={self.login} email={self.email}"
 
-class Fornecedor(UserMixin, Base):
+class Fornecedor(Base):
   __tablename__ = 'fornecedor'
   
   id=Column(Integer,primary_key=True)
@@ -30,26 +30,28 @@ class Fornecedor(UserMixin, Base):
   numero=Column(Integer, nullable=False)
   cep=Column(Integer,nullable=False)
   uf=Column(String(2),nullable=False)
+  situacao=Column(String(10), nullable=False)
   nome_contato1=Column(String(20),nullable=False)
   nome_contato2=Column(String(20),nullable=False)
+  email_contato1=Column(String(20),nullable=False)
   email_contato2=Column(String(20),nullable=False)
-  email_contato2=Column(String(20),nullable=False)
-  fone_contato2=Column(String(10),nullable=False)
+  fone_contato1=Column(String(10),nullable=False)
   fone_contato2=Column(String(10),nullable=False)
 
+  def __repr__(self):
+    pass
 class Material(UserMixin, Base):
   __tablename__ = 'material'
 
   id=Column(Integer,primary_key=True)
-  fabricanteId=Column(Integer,nullable=False)
-  tipoId=Column(Integer,nullable=False)
-  grupoId=Column(Integer,nullable=False)
+  fabricante_id=Column(Integer,nullable=False)
+  tipo_id=Column(Integer,nullable=False)
+  grupo_id=Column(Integer,nullable=False)
   modelo=Column(String(50),nullable=False)
   ncm=Column(String(50),nullable=False)
-  estoqueMin=Column(Integer,nullable=False)
-  posicaoEstoque=Column(String(50),nullable=False)
-  foto=Column(BLOB,nullable=False)
-  possuiNumSerie=Column(Integer,nullable=False)
+  estoque_minimo=Column(Integer,nullable=False)
+  posicao_estoque=Column(String(50),nullable=False)
+  possui_numero_serie=Column(Integer,nullable=False)
 
 class Permissoes(UserMixin, Base):
   __tablename__ = 'permissoes'

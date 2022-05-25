@@ -34,7 +34,7 @@
                 <!-- Tipo -->
                 <div class="form-group" style="width: 18rem; float: right; padding-top: 12px;">
                   <h6><b>Tipo</b></h6>
-                  <select style="width: 10rem; padding-left: 28;">
+                  <select style="width: 10rem; padding-left: 28;" id="tipoMaterial">
                     <option>Selecione</option>
                     <option>Câmera</option>
                     <option>Rastreador</option>
@@ -44,7 +44,7 @@
                 <!-- Grupo -->
                 <div class="form-group" style="width: 18rem; padding-top: 12px;">
                   <h6><b>Grupo</b></h6>
-                  <select style="width: 10rem; padding-left: 28;">
+                  <select style="width: 10rem; padding-left: 28;" id="grupoMaterial">
                     <option>Selecione</option>
                     <option>Câmera</option>
                     <option>Rastreador</option>
@@ -57,9 +57,10 @@
                   <input type="text" class="form-control" id="materialModel" placeholder="Modelo do material"/>
                 </div>
                 <!-- Fabricante -->
+                <!-- alterar para dropdown menu -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="Fabricante">Fabricante</label>
-                  <input type="text" class="form-control" id="manufacturerMaterial" placeholder="Fabricante do material">
+                  <input type="number" class="form-control" id="manufacturerMaterial" placeholder="Fabricante do material">
                 </div>
                 <!-- Estoque Mínimo -->
                 <div class="form-group" style="width: 18rem; float: right;">
@@ -86,7 +87,7 @@
                   <label for="InputFile">Foto</label>
                   <div class="input-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="InputFile" style="float: right;">
+                      <input type="file" class="custom-file-input" id="inputFile" style="float: right;">
                       <label class="custom-file-label" for="InputFile">Escolher Arquivo</label>
                     </div>
                   </div>
@@ -94,7 +95,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
+                <button onclick={handleSubmit()} type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
               </div>
             </form>
           </div>
@@ -103,5 +104,52 @@
     </div>
   </section>
 </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+  function handleSubmit() {
+    let tipo = document.getElementById("tipoMaterial")
+    let grupo = document.getElementById("grupoMaterial")
+    let modelo = document.getElementById("materialModel")
+    let fabricante = document.getElementById("manufacturerMaterial")
+    let posicao = document.getElementById("positionStock")
+    let estoqueMin = document.getElementById("minStock")
+    let ncm = document.getElementById("materialNcm")
+    let nSerie = document.getElementById("serialNumber")
+    let foto = document.getElementById("inputFile")
+
+    let entry = {
+      tipo: tipo.value,
+      grupo: grupo.value,
+      modelo: modelo.value,
+      fabricante: fabricante.value,
+      posicao: posicao.value,
+      estoqueMin: estoqueMin.value,
+      ncm: ncm.value,
+      nSerie: nSerie.value,
+      foto: foto.value
+    }
+    console.log(entry)
+
+    fetch(`${window.origin}/material/newMaterial`,{
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(entry),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    }).then(function(response) {
+      console.log(response)
+      if(response.status !== 200) {
+        console.log(response.status)
+        return
+      }
+    })
+  }
+</script>
 
 {% endblock %}

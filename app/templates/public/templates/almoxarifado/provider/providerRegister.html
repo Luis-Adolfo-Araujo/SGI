@@ -34,47 +34,47 @@
                 <!-- Nome -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="name">Nome Fantasia</label>
-                  <input type="text" class="form-control" id="nomeFornecedor" placeholder="Nome Fantasia"/>
+                  <input type="text" class="form-control" id="nomeFantasia" placeholder="Nome Fantasia"/>
                 </div>
                 <!-- Razão Social -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="razaoSocial">Razão Social</label>
-                  <input type="text" class="form-control" id="NomeFantasiaFornecedor" placeholder="Razao Social">
+                  <input type="text" class="form-control" id="razaoSocial" placeholder="Razao Social">
                 </div>
                 <!-- CEP -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="cep">CEP</label>
-                  <input type="text" class="form-control" id="logradouroFornecedor" placeholder="CEP">
+                  <input type="text" class="form-control" id="cep" placeholder="CEP">
                 </div>
                 <!-- Cnpj -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="cnpj">CNPJ</label>
-                  <input type="number" class="form-control" id="cnpjFornecedor" placeholder="Cnpj do fornecedor">
+                  <input type="number" class="form-control" id="cnpj" placeholder="Cnpj do fornecedor">
                 </div>
                 <!-- Número -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="numero">Número</label>
-                  <input type="number" class="form-control" id="numeroFornecedor" placeholder="número">
+                  <input type="number" class="form-control" id="numero" placeholder="número">
                 </div>
                 <!-- Logradouro -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="Logradouro">Logradouro</label>
-                  <input type="number" class="form-control" id="cepFornecedor" placeholder="Logradouro">
+                  <input type="text" class="form-control" id="logradouro" placeholder="Logradouro">
                 </div>
                 <!-- UF -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="uf">UF</label>
-                  <input type="text" class="form-control" id="ufFornecedor" placeholder="UF">
+                  <input type="text" class="form-control" id="uf" placeholder="UF">
                 </div>
                 <!-- Cidade -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="cidade">Cidade</label>
-                  <input type="text" class="form-control" id="cidadeFornecedor" placeholder="cidade">
+                  <input type="text" class="form-control" id="cidade" placeholder="cidade">
                 </div>
                 <!-- Nome Contato 1 -->
                 <div class="form-group" style="width: 18rem; float: right; padding-top: 4px;">
                   <h6><b>Situação</b></h6>
-                  <select style="width: 10rem; padding-left: 28;">
+                  <select style="width: 10rem; padding-left: 28;" id="situacao">
                     <option>Selecione</option>
                     <option>Ativo</option>
                     <option>Inativo</option>
@@ -83,43 +83,43 @@
                 <!-- Bairro -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="bairro">Bairro</label>
-                  <input type="text" class="form-control" id="bairroFornecedor" placeholder="Bairro">
+                  <input type="text" class="form-control" id="bairro" placeholder="Bairro">
                 </div>
                 <!-- Nome Contato 2 -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="nomeContato2">Nome Contato 2</label>
-                  <input type="text" class="form-control" id="nomeContato2Fornecedor" placeholder="Nome do contato">
+                  <input type="text" class="form-control" id="nomeContato2" placeholder="Nome do contato">
                 </div>
                 <!-- Email Contato 1 -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="nomeContato1">Nome Contato 1</label>
-                  <input type="text" class="form-control" id="nomeContato1Fornecedor" placeholder="Nome do contato">
+                  <input type="text" class="form-control" id="nomeContato1" placeholder="Nome do contato">
                 </div>
                 <!-- Email Contato 2 -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="emailContato1">Email Contato 1</label>
-                  <input type="email" class="form-control" id="emailContato1Fornecedor" placeholder="Email do contato">
+                  <input type="email" class="form-control" id="emailContato1" placeholder="Email do contato">
                 </div>
                 <!-- Fone Contato 1 -->
                 <div class="form-group" style="width: 18rem;">
                   <label for="foneContato1">Fone Contato 1</label>
-                  <input type="number" class="form-control" id="foneContato1Fornecedor" placeholder="fone do contato">
+                  <input type="number" class="form-control" id="foneContato1" placeholder="fone do contato">
                 </div>
                 <!-- Email Fone 2 -->
                 <div class="form-group" style="width: 18rem;  float: left;">
                   <label for="foneContato2">Fone Contato 2</label>
-                  <input type="number" class="form-control" id="foenContato2Fornecedor" placeholder="fone do contato">
+                  <input type="number" class="form-control" id="foneContato2" placeholder="fone do contato">
                 </div>
                 <!-- Situação -->
                 <div class="form-group" style="width: 18rem; float: right;">
                   <label for="emailContato2">Email Contato 2</label>
-                  <input type="email" class="form-control" id="emailContato2Fornecedor" placeholder="Email do contato">
+                  <input type="email" class="form-control" id="emailContato2" placeholder="Email do contato">
                 </div>
               </div>
               </select>
               <!-- /.card-body -->
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
+                <button onclick={submit_entry()} type="submit" class="btn btn-primary" style="float: right;">Cadastrar</button>
               </div>
             </form>
           </div>
@@ -130,3 +130,65 @@
 </div>
 
 {% endblock %} 
+
+{% block script %}
+  <script>
+
+    function submit_entry() {
+      let nomeFantasia = document.getElementById("nomeFantasia")
+      let razaoSocial = document.getElementById("razaoSocial")
+      let cep = document.getElementById("cep")
+      let cnpj = document.getElementById("cnpj")
+      let numero = document.getElementById("numero")
+      let logradouro = document.getElementById("logradouro")
+      let uf = document.getElementById("uf")
+      let cidade = document.getElementById("cidade")
+      let situacao = document.getElementById("situacao")
+      let bairro = document.getElementById("bairro")
+      let nomeContato1 = document.getElementById("nomeContato1")
+      let nomeContato2 = document.getElementById("nomeContato2")
+      let emailContato1 = document.getElementById("emailContato1")
+      let emailContato2 = document.getElementById("emailContato2")
+      let foneContato1 = document.getElementById("foneContato1")
+      let foneContato2 = document.getElementById("foneContato2")
+
+      let entry = {
+        nomeFantasia: nomeFantasia.value,
+        razaoSocial: razaoSocial.value,
+        cep: cep.value,
+        cnpj: cnpj.value,
+        numero: numero.value,
+        logradouro: logradouro.value,
+        uf: uf.value,
+        cidade: cidade.value,
+        situacao: situacao.value,
+        bairro: bairro.value,
+        nomeContato1: nomeContato1.value,
+        nomeContato2: nomeContato2.value,
+        emailContato1: emailContato1.value,
+        emailContato2: emailContato2.value,
+        foneContato1: foneContato1.value,
+        foneContato2: foneContato2.value
+      };
+
+      fetch(`${window.origin}/prov/newProv`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(entry),
+        cache: "no-cache",
+        headers: new Headers({
+          "content-type": "application/json"
+        })
+      }).then(function (response) {
+        if (response.status !== 200){
+          console.log(response.status)
+          return
+        }
+        else {
+          console.log(response)
+        }
+      })
+    }
+
+  </script>
+{% endblock %}
