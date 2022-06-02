@@ -20,6 +20,10 @@
         <a class="link" href="/prov" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Fornecedor</b></h2>
       </div>
+      <table class="table" style="display: block;">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
       </div>
       <div class="card-body">
         <div id="providerGrid" style="padding-bottom: 50px;"></div>
@@ -36,4 +40,45 @@
 </body>
 
 </html>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(function () {
+    $("#providerGrid").jsGrid({
+      height: "100%",
+      width: "100%",
+
+      sorting: true,
+      paging: true,
+
+      data: db.clients,
+
+      fields: [
+        { name: "Nome", type: "text", width: 150 },
+        { name: "Nome Fantasia", type: "number", width: 150 },
+        { name: "CNPJ", type: "text", width: 200 },
+        { name: "Logradouro", type: "select", items: db.countries, valueField: "Id", textField: "Name", width: 100 },
+        { name: "bairro", type: "text", width: 150 },
+        { name: "cidade", type: "number",},
+        { name: "numero", type: "number"},
+        { name: "CEP", type: "number",},
+        { name: "UF", type: "number",},
+        { name: "Nome Contato 1", type: "number",},
+        { name: "Nome Contato 2", type: "number",},
+        { name: "fone Contato 1", type: "number",},
+        { name: "fone Contato 2", type: "number",},
+        { name: "email Contato 1", type: "number",},
+        { name: "email Contato 2", type: "number",},
+        { name: "Situação", type: "text",},
+        
+      ]
+    });
+  });
+</script>
+
+<script>
+  loadIntoTable(`${window.origin}/fetchData/fornecedor`, document.querySelector('table'))
+</script>
+
 {% endblock %}

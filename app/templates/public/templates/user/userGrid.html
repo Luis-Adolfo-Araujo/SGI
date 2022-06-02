@@ -20,10 +20,10 @@
         <a class="link" href="/user" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Usuários</b></h2>
       </div>
-      </div>
-      <div class="card-body">
-        <div id="userGrid" style="padding-bottom: 50px;"></div>
-      </div>
+      <table class="table">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
     </div>
   </section>
 </div>
@@ -40,27 +40,6 @@
 
 {% block script %} 
 <script>
-  $(function () {
-    $("#userGrid").jsGrid({
-      height: "100%",
-      width: "100%",
-  
-      sorting: true,
-      paging: true,
-  
-      data: db.clients,
-  
-      fields: [
-        { name: "Nome", type: "text", width: 150 },
-        { name: "Login", type: "number", width: 150 },
-        { name: "Email", type: "text", width: 200 },
-        { name: "Excluido", type: "select", items: db.countries, valueField: "Id", textField: "Name", width: 100 },
-        { name: "permissao", type: "text", width: 150 },
-        { name: "ativo", type: "checkbox", title: "Ativo" }
-      ]
-    });
-  });
+  loadIntoTable(`${window.origin}/fetchData/usuario`, document.querySelector('table'))
 </script>
-
-
 {% endblock %}

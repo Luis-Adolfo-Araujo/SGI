@@ -20,6 +20,10 @@
         <a class="link" href="/material" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Material</b></h2>
       </div>
+      <table class="table" style="display: block;">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
       </div>
       <div class="card-body">
         <div id="materialGrid" style="padding-bottom: 50px;"></div>
@@ -36,4 +40,10 @@
 </body>
 
 </html>
+{% endblock %}
+
+{% block script %}
+<script>
+  loadIntoTable(`${window.origin}/fetchData/material`, document.querySelector('table'))
+</script>
 {% endblock %}

@@ -16,7 +16,6 @@ def index():
 @app.route("/home")
 @login_required
 def home():
-  print(current_user.nome)
   return render_template("public/templates/webTemplate.html", name=current_user.nome)
 
 @app.route("/user")
