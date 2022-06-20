@@ -6,7 +6,7 @@
 
 <div class="content-wrapper">
   <div class="content-header">
-    <div class="container-fluid">
+    <div class="container-fluname">
       <div class="row mb-2">
         <div class="col-sm-6">
         </div>
@@ -14,71 +14,49 @@
     </div>
   </div>
 
-  <section class="content" style="padding-right: 280px;">
+  <section class="content">
     <div class="card">
-      <div class="card-header" style="padding-right: 20px;">
+      <div class="card-header">
         <a class="link" href="/prov" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Fornecedor</b></h2>
       </div>
-      <table class="table" style="display: block;">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
-      </div>
-      <div class="card-body">
-        <div id="providerGrid" style="padding-bottom: 50px;"></div>
-      </div>
+      <div id="wrapper"></div>
     </div>
   </section>
 </div>
 
-<aside class="control-sidebar control-sidebar-dark">
-</aside>
-</div>
-
-</script>
 </body>
 
 </html>
 {% endblock %}
 
 {% block script %}
+
 <script>
-  $(function () {
-    $("#providerGrid").jsGrid({
-      height: "100%",
-      width: "100%",
-
-      sorting: true,
-      paging: true,
-
-      data: db.clients,
-
-      fields: [
-        { name: "Nome", type: "text", width: 150 },
-        { name: "Nome Fantasia", type: "number", width: 150 },
-        { name: "CNPJ", type: "text", width: 200 },
-        { name: "Logradouro", type: "select", items: db.countries, valueField: "Id", textField: "Name", width: 100 },
-        { name: "bairro", type: "text", width: 150 },
-        { name: "cidade", type: "number",},
-        { name: "numero", type: "number"},
-        { name: "CEP", type: "number",},
-        { name: "UF", type: "number",},
-        { name: "Nome Contato 1", type: "number",},
-        { name: "Nome Contato 2", type: "number",},
-        { name: "fone Contato 1", type: "number",},
-        { name: "fone Contato 2", type: "number",},
-        { name: "email Contato 1", type: "number",},
-        { name: "email Contato 2", type: "number",},
-        { name: "Situação", type: "text",},
-        
+  const headers = [
+        {id: 'nome', name: "Nome"},
+        {id: 'nome_fantasia',name: "Nome Fantasia"},
+        {id: 'cnpj',name: "CNPJ", },
+        {id: 'logradouro',name: "Logradouro",},
+        {id: 'bairro',name: "Bairro", },
+        {id: 'cidade',name: "Cidade", },
+        {id: 'numero', name: "Numero", },
+        {id: 'cep',name: "CEP", },
+        {id: 'uf', name: "UF", },
+        {id: 'nome_contato1', name: "Nome Contato 1",},
+        {id: 'nome_contato2', name: "Nome Contato 2",},
+        {id: 'fone_contato1', name: "Fone Contato 1",},
+        {id: 'fone_contato2', name: "Fone Contato 2",},
+        {id: 'email_contato1', name: "Email Contato 1",},
+        {id: 'email_contato2', name: "Email Contato 2",},
+        {id: 'situacao', name: "Situação", },
+        {id: 'edit', name: 'Editar', 
+          formatter: (cell, row) => {
+            return gridjs.h('p', {onClick: () => alert(`Editing "${row.cells[2].data}"`)}, 'Edit');
+        }}
       ]
-    });
-  });
-</script>
 
-<script>
-  loadIntoTable(`${window.origin}/fetchData/fornecedor`, document.querySelector('table'))
+      makeProviderGrid(headers, `${window.origin}/fetchData/fornecedor`);
 </script>
 
 {% endblock %}

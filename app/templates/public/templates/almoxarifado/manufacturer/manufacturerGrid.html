@@ -14,20 +14,13 @@
     </div>
   </div>
 
-  <section class="content" style="padding-right: 280px;">
+  <section class="content">
     <div class="card">
-      <div class="card-header" style="padding-right: 20px;">
+      <div class="card-header">
         <a class="link" href="/manuf" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Fabricante</b></h2>
       </div>
-      <table class="table" style="display: block;">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
-      </div>
-      <div class="card-body">
-        <div id="manufacturerGrid" style="padding-bottom: 50px;"></div>
-      </div>
+    <div id="wrapper"></div>
     </div>
   </section>
 </div>
@@ -44,6 +37,31 @@
 
 {% block script %}
 <script>
-  loadIntoTable(`${window.origin}/fetchData/fabricante`, document.querySelector('table'))
+  const headers = [
+        {id: 'nome', name: "Nome"},
+        {id: 'nome_fantasia',name: "Nome Fantasia"},
+        {id: 'cnpj',name: "CNPJ", },
+        {id: 'logradouro',name: "Logradouro",},
+        {id: 'bairro',name: "Bairro", },
+        {id: 'cidade',name: "Cidade", },
+        {id: 'numero', name: "Numero", },
+        {id: 'cep',name: "CEP", },
+        {id: 'uf', name: "UF", },
+        {id: 'nome_contato1', name: "Nome Contato 1",},
+        {id: 'nome_contato2', name: "Nome Contato 2",},
+        {id: 'fone_contato1', name: "Fone Contato 1",},
+        {id: 'fone_contato2', name: "Fone Contato 2",},
+        {id: 'email_contato1', name: "Email Contato 1",},
+        {id: 'email_contato2', name: "Email Contato 2",},
+        {id: 'situacao', name: "Situação", },
+        {id: 'edit', name: 'Editar', 
+          formatter: (cell, row) => {
+            return gridjs.h('p', {onClick: () => alert(`Editing "${row.cells[2].data}"`)}, 'Edit');
+        }}
+      ]
+
+      
+
+      makeProviderGrid(headers, `${window.origin}/fetchData/fabricante`);
 </script>
 {% endblock %}

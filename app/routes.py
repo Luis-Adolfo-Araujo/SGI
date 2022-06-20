@@ -4,8 +4,10 @@
 import hashlib
 import json
 
+from numpy import append
+
 from app import app, session
-from app.models import Fornecedor, Material, Usuario
+from app.models import Fornecedor, Material, Usuario, Fabricante
 from flask import Flask, Response, request, jsonify, make_response, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
@@ -128,6 +130,57 @@ def postNewProvider():
     except:
         return make_response(jsonify({"message": "Algo deu errado ao cadastrar fornecedor!"}))
 
+@app.route("/manuf/newManuf", methods=["POST"])
+@login_required
+def postNewManufacturer():
+    try:
+        obj = request.get_json()
+        
+        nomeFantasia = obj["nomeFantasia"]
+        razaoSocial = obj["razaoSocial"]
+        cep = obj["cep"]
+        cnpj = obj["cnpj"]
+        numero = obj["numero"]
+        logradouro = obj["logradouro"]
+        uf = obj["uf"]
+        cidade = obj["cidade"]
+        situacao = obj["situacao"]
+        bairro = obj["bairro"]
+        nomeContato1 = obj["nomeContato1"]
+        nomeContato2 = obj["nomeContato2"]
+        emailContato1 = obj["emailContato1"]
+        emailContato2 = obj["emailContato2"]
+        foneContato1 = obj["foneContato1"]
+        foneContato2 = obj["foneContato2"]
+
+        localSession = session()
+
+        newManufacturer = Fabricante(
+            nome=razaoSocial,
+            nome_fantasia=nomeFantasia,
+            cep=cep,
+            cnpj=cnpj,
+            numero=numero,
+            logradouro=logradouro,
+            uf=uf,
+            cidade=cidade,
+            situacao=situacao,
+            bairro=bairro,
+            nome_contato1=nomeContato1,
+            nome_contato2=nomeContato2,
+            email_contato1=emailContato1,
+            email_contato2=emailContato2,
+            fone_contato1=foneContato1,
+            fone_contato2=foneContato2
+        )
+        
+        localSession.add(newManufacturer)
+        localSession.commit()
+
+        return make_response(jsonify({"message": "Fornecedor cadastrado com sucesso!"}), 200)
+    except:
+        return make_response(jsonify({"message": "Algo deu errado ao cadastrar fornecedor!"}))
+
 @app.route("/material/newMaterial", methods=["POST"])
 @login_required
 def postNewMaterial():
@@ -178,20 +231,14 @@ def postNewMaterial():
 @login_required
 def fetchDbUserData():
     
+    # TODO - change the way data is showed so that it only returns the data values instead of the whole object
+
     localSession = session()
-    headers = {
-        'headers': [
-            'Ativo',
-            'Email', 
-            'Login',
-            'Nome',
-            'Permissão'
-            ]
-        }
     data = localSession.execute("SELECT ativo, email, login, nome, permissoes_id   FROM usuario")
     # <sqlalchemy.engine.cursor.CursorResult object at 0x10877ca90>
     # convert cursorResult (some spetial keyed tuple that is returned) to dict so that we can manipulate data
     data = [r._asdict() for r in data]
+    list_data = []
     for row in data:
         if row['permissoes_id'] == 1:
             row['permissoes_id'] = 'Administrador'
@@ -202,7 +249,16 @@ def fetchDbUserData():
             row['ativo'] = 'ativo'
         else:
             row['ativo'] = 'inativo'
-    data.insert(0, headers)
+    
+    # store the data values from the database in a list
+    for row in data:
+        list = []
+        list.append(row['ativo'])
+        list.append(row['email'])
+        list.append(row['login'])
+        list.append(row['nome'])
+        list.append(row['permissoes_id'])
+        list_data.append(list)
     
     return make_response(jsonify(data), 200)
 
@@ -211,18 +267,6 @@ def fetchDbUserData():
 def fetchDbMaterialData():
     
     localSession = session()
-    headers = {
-        'headers': [
-            'Estoque minimo',
-            'Fabricante',
-            'Grupo',
-            'Modelo',
-            'Ncm',
-            'Numero Série',
-            'Posicao Estoque',
-            'Tipo', 
-            ]
-        }
     data = localSession.execute("""SELECT 
     fabricante_id, tipo_id, 
     grupo_id, modelo, ncm, 
@@ -233,8 +277,6 @@ def fetchDbMaterialData():
     # <sqlalchemy.engine.cursor.CursorResult object at 0x10877ca90>
     # convert cursorResult (some spetial keyed tuple that is returned) to dict so that we can manipulate data
     data = [r._asdict() for r in data]
-    data.insert(0, headers)
-    print(data)    
     return make_response(jsonify(data), 200)
 
 @app.route("/fetchData/fornecedor", methods=["GET"])
@@ -242,32 +284,11 @@ def fetchDbMaterialData():
 def fetchDbFornecedorData():
     
     localSession = session()
-    headers = {
-        'headers': [
-            'Bairro',
-            'CEP',
-            'Cidade',
-            'CNPJ',
-            'Email Contato 1',
-            'Email Contato 2',
-            'Fone Contato 1',
-            'Fone Contato 2',
-            'Logradouro',
-            'Nome Contato 1',
-            'Nome Contato 2',
-            'Nome Fantasia',
-            'Número',
-            'Razão Social',
-            'Situacao',
-            'UF',
-            ]
-        }
     data = localSession.execute("SELECT nome, nome_fantasia, cep, cnpj, numero, logradouro, uf, cidade, situacao, bairro, nome_contato1, nome_contato2, email_contato1, email_contato2, fone_contato1, fone_contato2 FROM fornecedor")
 
     # <sqlalchemy.engine.cursor.CursorResult object at 0x10877ca90>
     # convert cursorResult (some spetial keyed tuple that is returned) to dict so that we can manipulate data
     data = [r._asdict() for r in data] 
-    data.insert(0, headers)
     return make_response(jsonify(data), 200)
 
 @app.route("/fetchData/fabricante", methods=["GET"])
@@ -275,32 +296,11 @@ def fetchDbFornecedorData():
 def fetchDbFabricanteData():
     
     localSession = session()
-    headers = {
-        'headers': [
-            'Bairro',
-            'CEP',
-            'Cidade',
-            'CNPJ',
-            'Email Contato 1',
-            'Email Contato 2',
-            'Fone Contato 1',
-            'Fone Contato 2',
-            'Logradouro',
-            'Nome Contato 1',
-            'Nome Contato 2',
-            'Nome Fantasia',
-            'Número',
-            'Razão Social',
-            'Situacao',
-            'UF',
-            ]
-        }
-    data = localSession.execute("SELECT nome, nome_fantasia, cep, cnpj, numero, logradouro, uf, cidade, situacao, bairro, nome_contato1, nome_contato2, email_contato1, email_contato2, fone_contato1, fone_contato2 FROM fornecedor")
+    data = localSession.execute("SELECT nome, nome_fantasia, cep, cnpj, numero, logradouro, uf, cidade, situacao, bairro, nome_contato1, nome_contato2, email_contato1, email_contato2, fone_contato1, fone_contato2 FROM fabricante")
 
     # <sqlalchemy.engine.cursor.CursorResult object at 0x10877ca90>
     # convert cursorResult (some spetial keyed tuple that is returned) to dict so that we can manipulate data
     data = [r._asdict() for r in data] 
-    data.insert(0, headers)
     return make_response(jsonify(data), 200)
 
 

@@ -14,20 +14,13 @@
     </div>
   </div>
 
-  <section class="content" style="padding-right: 280px;">
+  <section class="content" >
     <div class="card">
-      <div class="card-header" style="padding-right: 20px;">
+      <div class="card-header">
         <a class="link" href="/material" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Material</b></h2>
       </div>
-      <table class="table" style="display: block;">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
-      </div>
-      <div class="card-body">
-        <div id="materialGrid" style="padding-bottom: 50px;"></div>
-      </div>
+      <div id="wrapper"></div>
     </div>
   </section>
 </div>
@@ -44,6 +37,23 @@
 
 {% block script %}
 <script>
-  loadIntoTable(`${window.origin}/fetchData/material`, document.querySelector('table'))
+
+  const headers = [
+          {id: 'estoque_minimo', name: 'Estoque minimo'},
+          {id: 'fabricante_id', name: 'Fabricante'},
+          {id: 'grupo_id', name: 'Grupo'},
+          {id: 'modelo', name: 'Modelo'},
+          {id: 'ncm', name: 'Ncm'},
+          {id: 'foto', name: 'Foto'},
+          {id: 'possui_numero_serie', name: 'Numero Série'},
+          {id: 'posicao_estoque', name: 'Posicao Estoque'},
+          {id: 'tipo_id', name: 'Tipo'},
+          {id: 'edit', name: 'Editar', 
+          formatter: (cell, row) => {
+            return gridjs.h('p', {onClick: () => alert(`Editing "${row.cells[6].data}"`)}, 'Edit');
+        }}
+        ];
+  
+  makeMaterialGrid(headers, `${window.origin}/fetchData/material`);
 </script>
 {% endblock %}

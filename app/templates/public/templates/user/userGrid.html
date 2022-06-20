@@ -1,6 +1,6 @@
 {% extends "public/templates/webTemplate.html" %}
 
-{% block title %} Cadastrar Usuário {% endblock %}
+{% block title %} Usuários {% endblock %}
 
 {% block body %}
 
@@ -14,18 +14,17 @@
     </div>
   </div>
 
-  <section class="content" style="padding-right: 280px;">
+  <section class="content">
     <div class="card">
-      <div class="card-header" style="padding-right: 20px;">
+      <div class="card-header">
         <a class="link" href="/user" style="float: right;";><button type="click" class="btn btn-primary"> Adicionar </button></a>
         <h2 class="card-title" style="padding-top: 10px;"><b>Usuários</b></h2>
       </div>
-      <table class="table">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
+      <div id="wrapper"></div>
     </div>
   </section>
+
+
 </div>
 
 <aside class="control-sidebar control-sidebar-dark">
@@ -40,6 +39,26 @@
 
 {% block script %} 
 <script>
-  loadIntoTable(`${window.origin}/fetchData/usuario`, document.querySelector('table'))
+
+const headers = [
+          {id: 'ativo', name: 'Ativo'},
+          {id: 'email', name: 'Email'},
+          {id: 'login', name: 'Login'},
+          {id: 'nome', name: 'Nome'},
+          {id: 'permissoes_id', name: 'Permissão'},
+          {id: 'edit', name: 'Editar', 
+          formatter: (cell, row) => {
+            return gridjs.h('p', {onClick: () => alert(`Editing "${row.cells[1].data}" "${row.cells[2].data}"`)}, 'Edit');
+          }},
+        ];
+  
+makeUserGrid(headers, `${window.origin}/fetchData/usuario`);
+  
 </script>
+
+<script>
+
+</script>
+
+
 {% endblock %}

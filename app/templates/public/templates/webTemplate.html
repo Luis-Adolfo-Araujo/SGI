@@ -13,7 +13,9 @@
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
   <!-- SGI css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/sgi.css') }}" />
-    <!-- Font Awesome -->
+  <!-- table -->  
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/gridjs/mermaid.min.css')}}" />
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css')}}" />
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="{{ url_for('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}" />
@@ -97,13 +99,17 @@
   </div>
   </aside>
 
-  <div class="content-wrapper" >
+  <div>
     {% block body %} {% endblock %}
   </div>
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <!-- jQuery -->
   <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+  <!-- DataTable -->
+  <script src="{{ url_for('static', filename='plugins/gridjs/gridjs.umd.js')}}"></script> 
+  <script src="{{ url_for('static', filename='plugins/gridjs/gridjsmodule.js')}}"></script> 
   <!-- Bootstrap 4 -->
   <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <!-- AdminLTE App -->

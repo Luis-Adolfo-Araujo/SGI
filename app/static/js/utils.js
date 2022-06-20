@@ -1,60 +1,147 @@
 function handleLogOut() {
-
   fetch(`${window.origin}/logout`, {
     method: "POST",
     credentials: "include", //insert cookies in the page
-    body: '', 
+    body: "",
     cache: "no-cache",
     headers: new Headers({
-      "content-type": "application/json"
-    })
+      "content-type": "application/json",
+    }),
   }).then(function (response) {
-      if (response.status !== 200){
-        console.log(response.status)
-        return
-      } else {
-        window.location.href = ""
-      }
-    })
-  }
-
-  async function loadIntoTable(url, table){
-    let tHead = document.querySelector('thead')
-    let tData = document.querySelector('tbody')
-    let response = await fetch(url)
-    let data = await response.json();
-    data = JSON.stringify(data);
-    
-    // clear table
-    tHead.innerHTML = "<tr></tr>";
-    tData.innerHTML = "";
-    
-    let json = JSON.parse(data)
-    
-    // populate headers
-    // define a table header from response
-    // associate text with headerText and append it to tHead which is a table header html element
-    for (const headerText of json[0].headers) {
-      const headerElement = document.createElement("th");
-      headerElement.textContent = headerText;
-      tHead.querySelector("tr").appendChild(headerElement)
-    } 
-    
-    for (const row of Object.values(json)) {
-      console.log(row)
-      values = Object.values(row)
-      const rowElement = document.createElement("tr");
-      
-      
-      for (const textItem of values) {
-        if (typeof(textItem) === 'object'){
-          continue
-        }
-        const dataElement = document.createElement("td");
-        dataElement.textContent = textItem;
-        rowElement.appendChild(dataElement);
-      }
-
-      tData.appendChild(rowElement)
+    if (response.status !== 200) {
+      console.log(response.status);
+      return;
+    } else {
+      window.location.href = "";
     }
-  }
+  });
+}
+
+function makeUserGrid(column, dataUrl) {
+  new gridjs.Grid({
+    columns: column,
+    server: {
+      url: dataUrl,
+      then: (data) =>
+        data.map((card) => [
+          card.ativo,
+          card.email,
+          card.login,
+          card.nome,
+          card.permissoes_id,
+        ]),
+      handle: (res) => {
+        console.log(res);
+        if (res.status === 404) return { data: [] };
+        if (res.ok) return res.json();
+        throw Error("something went wrong");
+      }
+      
+    },
+    pagination: {
+      enabled: true,
+      limit: 10,
+      summary: false
+    },
+    search: {
+      enabled: true
+    },
+    sort: true
+  }).render(document.getElementById("wrapper"));
+}
+
+function makeMaterialGrid(column, dataUrl) {
+  new gridjs.Grid({
+    columns: column,
+    server: {
+      url: dataUrl,
+      then: (data) =>
+        data.map((card) => [
+          card.estoque_minimo,
+          card.fabricante_id,
+          card.grupo_id,
+          card.modelo,
+          card.ncm,
+          card.foto,
+          card.possui_numero_serie,
+          card.posicao_estoque,
+          card.tipo_id
+        ]),
+      handle: (res) => {
+        if (res.status === 404) return { data: [] };
+        if (res.ok) return res.json();
+        throw Error("something went wrong");
+      },
+    },
+    pagination: {
+      enabled: true,
+      limit: 10,
+      summary: false
+    },
+    search: {
+      enabled: true
+    },
+    sort: true
+  }).render(document.getElementById("wrapper"));
+}
+
+function makeProviderGrid(column, dataUrl) {
+  new gridjs.Grid({
+    columns: column,
+    server: {
+      url: dataUrl,
+      then: (data) =>
+        data.map((card) => [
+          card.nome,
+          card.nome_fantasia,
+          card.cnpj,
+          card.logradouro,
+          card.bairro,
+          card.cidade,
+          card.numero,
+          card.cep,
+          card.uf,
+          card.nome_contato1,
+          card.nome_contato2,
+          card.fone_contato1,
+          card.fone_contato2,
+          card.email_contato1,
+          card.email_contato2,
+          card.situacao
+        ]),
+      handle: (res) => {
+        if (res.status === 404) return { data: [] };
+        if (res.ok) return res.json();
+        throw Error("something went wrong");
+      },
+    },resizable: true,
+    pagination: {
+      enabled: true,
+      limit: 10,
+      summary: false
+    },
+    search: {
+      enabled: true
+    },
+    sort: true
+  }).render(document.getElementById("wrapper"));
+}
+
+function createEditLink(rowElement) {
+  let dataElement = document.createElement("a");
+  let icon = document.createElement("i");
+  icon.className = "fas fa-edit";
+  icon.style = "padding-top: 15px; padding-left: 8px; color: grey";
+  // dataElement.href = 'userGrid/editUser/';
+  dataElement.appendChild(icon);
+  return rowElement.appendChild(dataElement);
+}
+
+function createRemoveLink(rowElement) {
+  dataElement = document.createElement("a");
+  icon = document.createElement("i");
+  icon.className = "fas fa-trash";
+  icon.style = "padding-left: 3px; color: #d9534f";
+  dataElement.appendChild(icon);
+  return rowElement.appendChild(dataElement);
+}
